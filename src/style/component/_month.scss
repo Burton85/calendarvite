@@ -1,0 +1,53 @@
+.month {
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    .nav {
+        &_item {
+            display: flex;
+            flex-direction: row;
+            &_close {
+                cursor: pointer;
+                margin: 2rem;
+                font-size: 5rem;
+                background-color: transparent;
+                transition: all 0.3s;
+                &:hover {
+                    opacity: 0.5;
+                    transform: scale(0.85);
+                }
+            }
+        }
+    }
+    .weekday {
+        height: 12rem;
+        width: 100%;
+        padding: 1rem 0;
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: repeat(7, 1fr);
+        &_item_title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            grid-area: 1/1/1/8;
+        }
+        &_item_icon {
+            margin: 2rem;
+            background-color: $primary;
+            border-radius: 4rem;
+            svg {
+                color: $secondary;
+            }
+            &:hover {
+                width: 6rem;
+                height: 6rem;
+            }
+        }
+    }
+}

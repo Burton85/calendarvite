@@ -1,0 +1,14 @@
+.week {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(7, 1fr);
+    grid-template-rows: repeat(25, 20rem);
+    &_item {
+        display: flex;
+        justify-content: center;
+        border: 0.05rem solid #ccc;
+        &_title{
+            align-self: flex-end;
+            font-size: 2rem;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html {
+    font-size: 10px;
+}
+*,
+body {
+    box-sizing: border-box;
+    font-family: $fontfamily;
+    font-weight: 400;
+}
+#app {
+    display: block;
+    margin: auto;
+    font-family: $fontfamily;
+    a {
+        text-decoration: none;
+        outline: none;
+        cursor: pointer;
+    }
+    button {
+        outline: none;
+        border: 0;
+
+    }
+}
+@media screen and(max-width:750px) {
+    html {
+        font-size: 8px;
+    }
+}

@@ -1,0 +1,12 @@
+.day {
+    grid-template-columns: 1.5fr 7fr;
+    &_item {
+        display: flex;
+        justify-content: center;
+        border: 0.05rem solid #ccc;
+        &_title{
+            align-self: flex-end;
+            font-size: 2rem;
+        }
+    }
+}
