@@ -5,9 +5,9 @@
     flex-direction: row;
     justify-content: space-between;
     &_text {
-        text-align: center;
+        @include flex_center_center;
         margin: 3rem;
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
     &_menus {
         cursor: pointer;
@@ -15,12 +15,10 @@
         flex-direction: row;
     }
     &_menu {
+        @include flex_center_center;
         position: relative;
         margin: 2rem;
-        display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         color: $primary;
         width: 12rem;
         height: 6rem;
