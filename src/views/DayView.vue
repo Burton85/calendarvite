@@ -13,14 +13,16 @@
             </h2>
         </li>
     </ul>
-    <month v-if="showMonth == true" @hideMonth="hideMonthHandlerParent()"></month>
+    <div class="calendarvite_btn_container">
+        <button class="calendarvite_btn" @click="showMonthHandlerParent()">+新增預約</button>
+    </div>
+    <month v-if="showMonth == true" @hideMonth="hideMonthHandlerParent()" :today="today" :toyear="toyear" :tomonth="tomonth"></month>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 import WeekDay from '../components/WeekDay.vue';
 import Month from '../components/MonthView.vue';
 import useWeek from '../composition/useWeek';
-
 export default defineComponent({
     name: 'DayView',
     components: {
