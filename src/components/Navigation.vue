@@ -1,6 +1,7 @@
 <template>
     <div class="nav">
-        <h1 class="nav_text">預約行事曆</h1>
+        <h1 class="nav_text" v-if="$route.path=='/week'">預約行事曆</h1>
+        <h1 class="nav_text" v-else>2021/04/12</h1>
         <div class="nav_menus">
             <ul class="nav_menu" :class="menuActive ? 'nav_menu--active' : ''" @click="menuChanger(menuActive)">
                 <li class="nav_menu_item">
@@ -29,9 +30,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router'
-
 import useMenu from '../composition/useMenu';
-
 export default defineComponent({
     name: 'Navigation',
     setup() {
