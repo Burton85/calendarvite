@@ -29,6 +29,22 @@ body {
 
     }
 }
+.calendarvite{
+    &_btn{
+        margin: 1rem auto;
+        color:white;
+        padding: 2rem 3rem;
+        background-color: $primary ;
+        border-radius: .5rem;
+        &_container{
+            bottom: 0;
+            position: fixed;
+            width: 100%;
+            background-color: white;
+            @include flex_center_center;
+        }
+    }
+}
 @media screen and(max-width:750px) {
     html {
         font-size: 8px;
