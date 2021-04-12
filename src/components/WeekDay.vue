@@ -1,7 +1,7 @@
 <template>
     <ul class="weekday">
         <li class="weekday_item">
-            <button class="weekday_item_icon" @click="monthShowHandler()">
+            <button class="weekday_item_icon" @click="showMonth()">
                 <svg
                     class="w-6 h-6"
                     fill="none"
@@ -21,11 +21,11 @@
         <li
             v-for="(day, index) in dayList"
             class="weekday_item"
-            :class="activeDate == firstDate + index ? 'weekday_item--active' : ''"
-            @click="activeDateHandlerChild(firstDate + index)"
+            :class="state.activeDate.date == firstDate + index && $route.path == '/day' ? 'weekday_item--active' : ''"
+            @click="setActiveDate(firstDate + index)"
         >
             <span class="weekday_item_Day">{{ day }}</span>
-            <span class="weekday_item_Date" :class="firstDate + index == today ? 'today' : ''">
+            <span class="weekday_item_Date" :class="firstDate + index == state.today.today ? 'today' : ''">
                 {{ firstDate + index }}
             </span>
         </li>
@@ -34,44 +34,37 @@
 
 <script lang="ts">
 import { defineComponent, emit } from 'vue';
+import { useState } from '../store';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
     name: 'WeekDay',
-    props: {
-        activeDate: {
-            type: Number,
-            default: 0,
-        },
-        today: {
-            type: Number,
-            default: 1,
-        },
-        tmpdate: {
-            type: Number,
-            default: 1,
-        },
-    },
     data() {
         return {
             dayList: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
         };
     },
+    setup(props, context) {
+        return {
+            ...useState(),
+        };
+    },
     computed: {
         firstDate() {
-            return this.today - this.tmpdate + 1;
+            let tmp =
+                new Date(
+                    this.state.activeDate.year,
+                    this.state.activeDate.month,
+                    this.state.activeDate.date
+                ).getDay() == 0
+                    ? 7
+                    : new Date(
+                          this.state.activeDate.year,
+                          this.state.activeDate.month,
+                          this.state.activeDate.date
+                      ).getDay();
+            return this.state.activeDate.date - tmp + 1;
         },
-    },
-    setup(props, context) {
-        const activeDateHandlerChild = (date) => {
-            context.emit('dateActived', date);
-        };
-        const monthShowHandler = () => {
-            context.emit('showMonth');
-        };
-        return {
-            activeDateHandlerChild,
-            monthShowHandler,
-        };
     },
 });
 </script>

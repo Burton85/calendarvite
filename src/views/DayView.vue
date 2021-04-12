@@ -1,11 +1,5 @@
 <template>
-    <week-day
-        :today="today"
-        :tmpdate="tmpDate"
-        :activeDate="activeDate"
-        @dateActived="(val) => (activeDate = val)"
-        @showMonth="showMonthHandlerParent()"
-    ></week-day>
+    <week-day></week-day>
     <ul class="week day">
         <li class="day_item" v-for="(item, index) in 25 * 2" :key="item">
             <h2 class="day_item_title" v-if="index % 2 == 0">
@@ -14,15 +8,15 @@
         </li>
     </ul>
     <div class="calendarvite_btn_container">
-        <button class="calendarvite_btn" @click="showMonthHandlerParent()">+新增預約</button>
+        <button class="calendarvite_btn" @click="showMonth()">+新增預約</button>
     </div>
-    <month v-if="showMonth == true" @hideMonth="hideMonthHandlerParent()" :today="today" :toyear="toyear" :tomonth="tomonth"></month>
+    <month v-if="state.isMonthShow == true"></month>
 </template>
 <script lang="ts">
+import { useState } from '../store';
 import { defineComponent } from 'vue';
 import WeekDay from '../components/WeekDay.vue';
 import Month from '../components/MonthView.vue';
-import useWeek from '../composition/useWeek';
 export default defineComponent({
     name: 'DayView',
     components: {
@@ -30,7 +24,9 @@ export default defineComponent({
         Month,
     },
     setup() {
-        return useWeek();
+        return {
+            ...useState(),
+        };
     },
 });
 </script>

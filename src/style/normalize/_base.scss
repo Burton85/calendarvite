@@ -26,17 +26,18 @@ body {
     button {
         outline: none;
         border: 0;
-
     }
 }
-.calendarvite{
-    &_btn{
+.calendarvite {
+    &_btn {
+        cursor: pointer;
         margin: 1rem auto;
-        color:white;
+        color: white;
         padding: 2rem 3rem;
-        background-color: $primary ;
-        border-radius: .5rem;
-        &_container{
+        background-color: $primary;
+        border-radius: 0.8rem;
+        font-size: 2rem;
+        &_container {
             bottom: 0;
             position: fixed;
             width: 100%;

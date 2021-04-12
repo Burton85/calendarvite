@@ -1,4 +1,3 @@
-  
 import { ref,computed  } from 'vue';
 
 const month_olympic = [31,29,31,30,31,30,31,31,30,31,30,31];
@@ -13,9 +12,9 @@ function daysMonth(month:number, year:number) {
 }
 
 
-export default function(props:any,context:any) {
-    const mYear = ref(props.toyear)
-    const mMonth = ref(props.tomonth-1)
+export default function(state:any,context:any) {
+    const mYear = ref(state.today.toyear)
+    const mMonth = ref(state.today.tomonth)
     const firstDayOfMonth = computed(()=>{
         let day=new Date(mYear.value,mMonth.value,1).getDay()
         if(day==0){
@@ -27,9 +26,6 @@ export default function(props:any,context:any) {
     
 
     const monthDayList=['M','T','W','T','F','S','S']
-    const monthHideHandler = () => {
-        context.emit('hideMonth');
-    };
 
     const monthCalendar=computed(()=>{
         let lastMonthSpace=new Array(firstDayOfMonth.value-1)
@@ -58,9 +54,9 @@ export default function(props:any,context:any) {
 
 
     const selectedDate = ref({
-        'year':props.toyear,
-        'month':props.month,
-        'date':props.today
+        'year':state.today.toyear,
+        'month':state.today.month,
+        'date':state.today.today
     })
     const dateSelecter=function(yer:number,mon:number,dat:number){
         selectedDate.value={
@@ -74,7 +70,6 @@ export default function(props:any,context:any) {
         mMonth,
         monthCalendar,
         firstDayOfMonth,
-        monthHideHandler,
         monthDayList,
         prevMonth,
         nextMonth,
