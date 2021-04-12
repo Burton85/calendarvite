@@ -5,6 +5,42 @@
     height: 100%;
     top: 0;
     left: 0;
+    &_container {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 10rem);
+        &_item{
+            cursor: pointer;
+            @include flex_center_center;
+            .today {
+                position: relative;
+                &::after {
+                    margin-top: 2.5rem;
+                    position: absolute;
+                    content: '';
+                    display: block;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: .8rem;
+                    height: .8rem;
+                    background-color: aquamarine;
+                    border-radius: 100%;
+                }
+            }
+            &_title{
+                width: 5rem;
+                height: 5rem;
+                @include flex_center_center;
+            }
+            &--active{
+                .month_container_item_title{
+                        background-color: $primary;
+                        color: white;
+                        border-radius: 50%;
+                }                    
+            }
+        }
+    }
     .nav {
         &_item {
             display: flex;
@@ -31,11 +67,15 @@
         grid-template-rows: 1fr 1fr;
         grid-template-columns: repeat(7, 1fr);
         &_item_title {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            @include flex_center_center;
             font-size: 2rem;
             grid-area: 1/1/1/8;
+            &--prev,&--next{
+                background-color: transparent;
+                cursor: pointer;
+                font-size: 3rem;
+                margin: 0 2rem;
+            }
         }
         &_item_icon {
             margin: 2rem;
