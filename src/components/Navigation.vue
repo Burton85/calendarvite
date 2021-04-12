@@ -49,9 +49,11 @@ import useMenu from '../composition/useMenu';
 export default defineComponent({
     name: 'Navigation',
     setup() {
+        const { state } = useState();
+
         return {
             ...useMenu(),
-            ...useState(),
+            state,
         };
     },
     computed: {

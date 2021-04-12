@@ -69,8 +69,8 @@ export default defineComponent({
     setup(props, context) {
         const { state } = useState();
         return {
-            ...useState(),
             ...useMonth(state, context),
+            state,
         };
     },
 });

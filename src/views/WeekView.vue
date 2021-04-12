@@ -24,8 +24,10 @@ export default defineComponent({
         Month,
     },
     setup() {
+        const { state } = useState();
+
         return {
-            ...useState(),
+            state,
         };
     },
 });
