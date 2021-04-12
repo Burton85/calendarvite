@@ -25,22 +25,40 @@
             </div>
         </div>
         <ul class="weekday">
-            <li class="weekday_item_title">2021/04</li>
+            <li class="weekday_item_title"> 
+                <button class="weekday_item_title--prev" @click="prevMonth()">&lt;</button> 
+                {{mYear+'/'+(mMonth+1)}}
+                <button class="weekday_item_title--next" @click="nextMonth()">&gt;</button>     
+            </li>
             <li v-for="(day, index) in monthDayList" class="weekday_item">
                 <span class="weekday_item_Day">{{ day }}</span>
             </li>
         </ul>
+        <ul class="month_container">
+            <li class="month_container_item" :class="selectedDate.date==item?'month_container_item--active':''" v-for="(item, index) in monthCalendar" :key="item" @click="dateSelecter(mYear,mMonth,item)">
+                <h2 class="month_container_item_title " :class="mYear==toyear&&mMonth==tomonth-1&&item==today?'today':''">
+                    {{item}}
+                </h2>
+            </li>
+        </ul>
+    </div>
+    <div class="calendarvite_btn_container">
+        <button class="calendarvite_btn">選擇</button>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import useMonth from '../composition/useMonth';
-
 export default defineComponent({
     name: 'Month',
+    props: {
+        today: Number,
+        toyear:Number,
+        tomonth:Number
+    },
     setup(props, context) {
-        return useMonth(context);
+        return useMonth(props,context);
     },
 });
 </script>
