@@ -1,11 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store';
 import './style/main.scss'
-import { state,createStore } from './store' 
+
+const _state=store.state
+const _useState=store
 
 
-createApp(App).provide(state, createStore())
-.use(router).mount('#app')
 
-// createApp(App).use(router).use(store).mount('#app')
+createApp(App).use(router).provide('state',_state).provide('useState',_useState).mount('#app')
