@@ -2,7 +2,7 @@
     <div class="nav">
         <h1 class="nav_text" v-if="$route.path == '/week'">預約行事曆</h1>
         <h1 class="nav_text" v-else>
-            <button class="nav_text--prev" @click="reduceActiveDate()">&lt;</button>
+            <button class="nav_text--prev" @click="useState.reduceActiveDate()">&lt;</button>
             <p class="nav_text_title">
                 {{
                     state.activeDate.year +
@@ -14,7 +14,7 @@
                     state.activeDate.date
                 }}
             </p>
-            <button class="nav_text--next" @click="addActiveDate()">&gt;</button>
+            <button class="nav_text--next" @click="useState.addActiveDate()">&gt;</button>
         </h1>
         <div class="nav_menus">
             <ul class="nav_menu" :class="menuActive ? 'nav_menu--active' : ''" @click="menuChanger(menuActive)">
@@ -41,19 +41,19 @@
         </div>
     </div>
 </template>
-<script lang="ts">
-import { useState } from '../store';
-import { defineComponent } from 'vue';
+<script lang='ts'>
+import { defineComponent,inject } from 'vue';
 import { useRoute } from 'vue-router';
 import useMenu from '../composition/useMenu';
 export default defineComponent({
     name: 'Navigation',
     setup() {
-        const { state } = useState();
-
+        const state:any= inject('state')
+        const useState: any = inject('useState')
         return {
             ...useMenu(),
             state,
+            useState
         };
     },
     computed: {
