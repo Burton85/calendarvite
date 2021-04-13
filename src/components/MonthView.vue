@@ -21,7 +21,7 @@
                 <h1 class="nav_text">選擇日期</h1>
             </div>
             <div class="nav_item">
-                <div class="nav_item_close" @click="hideMonth()">&times;</div>
+                <div class="nav_item_close" @click="useState.hideMonth()">&times;</div>
             </div>
         </div>
         <ul class="weekday">
@@ -56,21 +56,23 @@
         </ul>
     </div>
     <div class="calendarvite_btn_container">
-        <button class="calendarvite_btn" @click="hideMonth()">選擇</button>
+        <button class="calendarvite_btn" @click="useState.hideMonth()">選擇</button>
     </div>
 </template>
 
-<script lang="ts">
-import { useState } from '../store';
-import { defineComponent } from 'vue';
+<script lang='ts'>
+import { defineComponent,inject } from 'vue';
 import useMonth from '../composition/useMonth';
 export default defineComponent({
     name: 'Month',
     setup(props, context) {
-        const { state } = useState();
+        const state:any= inject('state')
+        const useState: any = inject('useState')
+
         return {
             ...useMonth(state, context),
             state,
+            useState
         };
     },
 });
