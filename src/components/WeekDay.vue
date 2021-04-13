@@ -1,7 +1,7 @@
 <template>
     <ul class="weekday">
         <li class="weekday_item">
-            <button class="weekday_item_icon" @click="showMonth()">
+            <button class="weekday_item_icon" @click="useState.showMonth()">
                 <svg
                     class="w-6 h-6"
                     fill="none"
@@ -22,7 +22,7 @@
             v-for="(day, index) in dayList"
             class="weekday_item"
             :class="state.activeDate.date == firstDate + index && $route.path == '/day' ? 'weekday_item--active' : ''"
-            @click="setActiveDate(firstDate + index)"
+            @click="useState.setActiveDate(firstDate + index)"
         >
             <span class="weekday_item_Day">{{ day }}</span>
             <span class="weekday_item_Date" :class="firstDate + index == state.today.today ? 'today' : ''">
@@ -32,11 +32,9 @@
     </ul>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { useState } from '../store';
+<script lang='ts'>
+import { defineComponent,inject } from 'vue';
 import { useRoute } from 'vue-router';
-
 export default defineComponent({
     name: 'WeekDay',
     data() {
@@ -45,10 +43,12 @@ export default defineComponent({
         };
     },
     setup(props, context) {
-        const { state } = useState();
+        const state:any= inject('state')
+        const useState: any = inject('useState')
 
         return {
             state,
+            useState
         };
     },
     computed: {
