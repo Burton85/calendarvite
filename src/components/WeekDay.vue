@@ -25,15 +25,24 @@
             @click="useState.setActiveDate(firstDate + index)"
         >
             <span class="weekday_item_Day">{{ day }}</span>
-            <span class="weekday_item_Date" :class="firstDate + index == state.today.today ? 'today' : ''">
+            <span
+                class="weekday_item_Date"
+                :class="
+                    firstDate + index == state.today.today &&
+                    state.activeDate.month == state.today.tomonth &&
+                    state.activeDate.year == state.today.toyear
+                        ? 'today'
+                        : ''
+                "
+            >
                 {{ firstDate + index }}
             </span>
         </li>
     </ul>
 </template>
 
-<script lang='ts'>
-import { defineComponent,inject } from 'vue';
+<script lang="ts">
+import { defineComponent, inject, computed } from 'vue';
 import { useRoute } from 'vue-router';
 export default defineComponent({
     name: 'WeekDay',
@@ -43,30 +52,21 @@ export default defineComponent({
         };
     },
     setup(props, context) {
-        const state:any= inject('state')
-        const useState: any = inject('useState')
+        const state: any = inject('state');
+        const useState: any = inject('useState');
+        const firstDate = computed(() => {
+            let tmp =
+                new Date(state.activeDate.year, state.activeDate.month, state.activeDate.date).getDay() == 0
+                    ? 7
+                    : new Date(state.activeDate.year, state.activeDate.month, state.activeDate.date).getDay();
+            return state.activeDate.date - tmp + 1;
+        });
 
         return {
+            firstDate,
             state,
-            useState
+            useState,
         };
-    },
-    computed: {
-        firstDate() {
-            let tmp =
-                new Date(
-                    this.state.activeDate.year,
-                    this.state.activeDate.month,
-                    this.state.activeDate.date
-                ).getDay() == 0
-                    ? 7
-                    : new Date(
-                          this.state.activeDate.year,
-                          this.state.activeDate.month,
-                          this.state.activeDate.date
-                      ).getDay();
-            return this.state.activeDate.date - tmp + 1;
-        },
     },
 });
 </script>

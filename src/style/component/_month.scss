@@ -9,7 +9,7 @@
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         grid-template-rows: repeat(6, 10rem);
-        &_item{
+        &_item {
             cursor: pointer;
             @include flex_center_center;
             .today {
@@ -21,23 +21,24 @@
                     display: block;
                     left: 50%;
                     transform: translateX(-50%);
-                    width: .8rem;
-                    height: .8rem;
+                    width: 0.8rem;
+                    height: 0.8rem;
                     background-color: aquamarine;
                     border-radius: 100%;
                 }
             }
-            &_title{
+            &_title {
+                font-size: 2rem;
                 width: 5rem;
                 height: 5rem;
                 @include flex_center_center;
             }
-            &--active{
-                .month_container_item_title{
-                        background-color: $primary;
-                        color: white;
-                        border-radius: 50%;
-                }                    
+            &--active {
+                .month_container_item_title {
+                    background-color: $primary;
+                    color: white;
+                    border-radius: 50%;
+                }
             }
         }
     }
@@ -70,11 +71,16 @@
             @include flex_center_center;
             font-size: 2rem;
             grid-area: 1/1/1/8;
-            &--prev,&--next{
-                background-color: transparent;
+            &--prev,
+            &--next {
                 cursor: pointer;
-                font-size: 3rem;
-                margin: 0 2rem;
+                @include flex_center_center;
+                margin: 0 1rem;
+                color: white;
+                background-color: gray;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
             }
         }
         &_item_icon {
