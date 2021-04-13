@@ -8,13 +8,12 @@
         </li>
     </ul>
     <div class="calendarvite_btn_container">
-        <button class="calendarvite_btn" @click="showMonth()">+新增預約</button>
+        <button class="calendarvite_btn" @click="useState.showMonth()">+新增預約</button>
     </div>
     <month v-if="state.isMonthShow == true"></month>
 </template>
-<script lang="ts">
-import { useState } from '../store';
-import { defineComponent } from 'vue';
+<script lang='ts'>
+import { defineComponent,inject } from 'vue';
 import WeekDay from '../components/WeekDay.vue';
 import Month from '../components/MonthView.vue';
 export default defineComponent({
@@ -24,10 +23,11 @@ export default defineComponent({
         Month,
     },
     setup() {
-        const { state } = useState();
-
+        const state:any= inject('state')
+        const useState: any = inject('useState')        
         return {
             state,
+            useState
         };
     },
 });
